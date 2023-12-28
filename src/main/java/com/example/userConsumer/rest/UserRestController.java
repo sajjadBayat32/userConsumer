@@ -2,9 +2,7 @@ package com.example.userConsumer.rest;
 
 import com.example.userConsumer.entity.User;
 import com.example.userConsumer.service.UserService;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,5 +19,16 @@ public class UserRestController {
     @GetMapping("/users")
     public List<User> findAll() {
         return userService.findAll();
+    }
+
+    @GetMapping("/users/{userId}")
+    public User findById(@PathVariable int userId) {
+        return userService.findById(userId);
+    }
+
+    @DeleteMapping("/users/{userId}")
+    public String deleteById(@PathVariable int userId) {
+        userService.deleteById(userId);
+        return "Done";
     }
 }

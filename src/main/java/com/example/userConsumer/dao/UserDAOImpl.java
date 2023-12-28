@@ -23,4 +23,16 @@ public class UserDAOImpl implements UserDAO {
         TypedQuery<User> theQuery = entityManager.createQuery("from User", User.class);
         return theQuery.getResultList();
     }
+
+    @Override
+    public User findById(int userId) {
+        return entityManager.find(User.class, userId);
+    }
+
+    @Override
+    public void deleteById(int userId) {
+        System.out.println(userId);
+        User theUser = entityManager.find(User.class, userId);
+        entityManager.remove(theUser);
+    }
 }
