@@ -23,12 +23,31 @@ public class UserRestController {
 
     @GetMapping("/users/{userId}")
     public User findById(@PathVariable int userId) {
-        return userService.findById(userId);
+        User theUser = userService.findById(userId);
+        if (theUser == null) {
+            throw new RuntimeException("User id not found");
+        }
+        return theUser;
+    }
+
+    @PostMapping("/users")
+    public User addUser(@RequestBody User user) {
+        user.setId(0);
+        return userService.save(user);
+    }
+
+    @PutMapping("/users")
+    public User updateUser(@RequestBody User user) {
+        return userService.save(user);
     }
 
     @DeleteMapping("/users/{userId}")
     public String deleteById(@PathVariable int userId) {
+        User theUser = userService.findById(userId);
+        if (theUser == null) {
+            throw new RuntimeException("User id not found");
+        }
         userService.deleteById(userId);
-        return "Done";
+        return "Deleted user id - " + userId;
     }
 }

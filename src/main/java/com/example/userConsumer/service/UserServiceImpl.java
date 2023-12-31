@@ -1,6 +1,5 @@
 package com.example.userConsumer.service;
 
-import com.example.userConsumer.dao.UserDAO;
 import com.example.userConsumer.entity.User;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,6 +25,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public User findById(int userId) {
         return userDAO.findById(userId);
+    }
+
+    @Transactional
+    @Override
+    public User save(User theUser) {
+        return userDAO.save(theUser);
     }
 
     @Transactional
