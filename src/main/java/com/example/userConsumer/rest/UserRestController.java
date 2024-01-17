@@ -22,8 +22,8 @@ public class UserRestController {
     }
 
     @GetMapping("/users/{userId}")
-    public User findById(@PathVariable int userId) {
-        User theUser = userService.findById(userId);
+    public User findById(@PathVariable String userId) {
+        User theUser = userService.findByUserId(userId);
         if (theUser == null) {
             throw new RuntimeException("User id not found");
         }
@@ -32,7 +32,6 @@ public class UserRestController {
 
     @PostMapping("/users")
     public User addUser(@RequestBody User user) {
-        user.setId(0);
         return userService.save(user);
     }
 
@@ -42,8 +41,8 @@ public class UserRestController {
     }
 
     @DeleteMapping("/users/{userId}")
-    public String deleteById(@PathVariable int userId) {
-        User theUser = userService.findById(userId);
+    public String deleteById(@PathVariable String userId) {
+        User theUser = userService.findByUserId(userId);
         if (theUser == null) {
             throw new RuntimeException("User id not found");
         }

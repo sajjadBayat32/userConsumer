@@ -3,37 +3,51 @@ package com.example.userConsumer.entity;
 import jakarta.persistence.*;
 
 @Entity
-@Table(name="user")
+@Table(name = "users")
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
-    private int id;
+    @Column(name = "user_id")
+    private String userId;
 
-    @Column(name="first_name")
+    @Id
+    @Column(name = "active")
+    private boolean active;
+
+    @Column(name = "first_name")
     private String firstName;
 
-    @Column(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
 
-    @Column(name="email")
+    @Column(name = "email")
     private String email;
 
-    public User() {}
+    public User() {
+    }
 
-    public User(String firstName, String lastName, String email) {
+    public User(String userId, boolean active, String firstName, String lastName, String email) {
+        this.userId = userId;
+        this.active = active;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
     }
 
-    public int getId() {
-        return id;
+    public String getUserId() {
+        return userId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setUserId(String userId) {
+        this.userId = userId;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 
     public String getFirstName() {
@@ -63,7 +77,8 @@ public class User {
     @Override
     public String toString() {
         return "User{" +
-                "id=" + id +
+                "userId=" + userId +
+                ", active=" + active +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
